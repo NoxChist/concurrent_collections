@@ -10,12 +10,11 @@ public class Main {
     private static final int QUEUE_CAPACITY = 100;
 
     private static ExecutorService executorService = Executors.newFixedThreadPool(3);
-    private static List<BlockingQueue<String>> queue =
-            List.of(new ArrayBlockingQueue<>(QUEUE_CAPACITY),
-                    new ArrayBlockingQueue<>(QUEUE_CAPACITY),
-                    new ArrayBlockingQueue<>(QUEUE_CAPACITY));
-
+    private static List<BlockingQueue<String>> queue = new ArrayList<>(TEXT_GEN.length());
     public static void main(String[] args) throws Exception {
+        for(int i=0;i<TEXT_GEN.length();i++){
+            queue.add(new ArrayBlockingQueue<>(QUEUE_CAPACITY));
+        }
         new Thread(() -> {
             for (int i = 0; i < STR_AMOUNT; i++) {
                 String text = generateText(TEXT_GEN, STR_LENGTH);
