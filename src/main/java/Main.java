@@ -11,8 +11,9 @@ public class Main {
 
     private static ExecutorService executorService = Executors.newFixedThreadPool(3);
     private static List<BlockingQueue<String>> queue = new ArrayList<>(TEXT_GEN.length());
+
     public static void main(String[] args) throws Exception {
-        for(int i=0;i<TEXT_GEN.length();i++){
+        for (int i = 0; i < TEXT_GEN.length(); i++) {
             queue.add(new ArrayBlockingQueue<>(QUEUE_CAPACITY));
         }
         new Thread(() -> {
